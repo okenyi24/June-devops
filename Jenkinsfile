@@ -25,10 +25,30 @@ pipeline{
               }
           }
           
-          stage('Package'){
-              steps{
-                  sh 'mvn package'
-              }
-          }
-      }
+          pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code repository
+                git 'https://github.com/Keyzoneeee/AKINS-REVISION.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                // Execute Maven package command
+                sh 'mvn package'
+            }
+        }
+    }
+    
+    post {
+        success {
+            // Archive the generated artifact
+            archiveArtifacts 'target/*.jar'
+        }
+    }
 }
+
