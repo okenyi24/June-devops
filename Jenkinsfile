@@ -44,11 +44,4 @@ pipeline{
         }
     }
     
-    post {
-        success {
-            // Archive the generated artifact
-            archiveArtifacts 'target/*.jar'
-        }
-    }
-}
 
