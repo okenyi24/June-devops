@@ -1,1 +1,1 @@
-HELLO CLASS, END OF CICD PIPELINE......HI EVERYONE. CICD PIPELINE AUTOMATION IS SET AND RUNNING.
+CloudSolution to DevOps maanaging your cicd pipeline setting Automation
