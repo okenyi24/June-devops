@@ -1,47 +1,36 @@
-pipeline{
-    tools{
+pipeline {
+    agent any
+    tools {
         jdk 'myjava'
         maven 'mymaven'
     }
-	agent any
-      stages{
-           stage('Checkout'){
-              steps{
-		 echo 'cloning..'
-                 git 'https://github.com/Keyzoneeee/AKINS-REVISION.git'
-              }
-          }
-          stage('Compile'){
-              steps{
-                  echo 'compiling..'
-                  sh 'mvn compile'
-	      }
-          }
-          stage('CodeReview'){
-              steps{
-		    
-		  echo 'codeReview'
-                  sh 'mvn pmd:pmd'
-              }
-          }
-          
-          pipeline {
-    agent any
-    
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your source code repository
+                echo 'Cloning repository..'
                 git 'https://github.com/Keyzoneeee/AKINS-REVISION.git'
             }
         }
-        
+        stage('Compile') {
+            steps {
+                echo 'Compiling..'
+                sh 'mvn compile'
+            }
+        }
+        stage('CodeReview') {
+            steps {
+                echo 'Performing code review..'
+                sh 'mvn pmd:pmd'
+            }
+        }
         stage('Build') {
             steps {
-                // Execute Maven package command
+                echo 'Building project..'
                 sh 'mvn package'
             }
         }
     }
+}
+
     
 
