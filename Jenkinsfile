@@ -1,34 +1,36 @@
-pipeline{
-    tools{
+pipeline {
+    agent any
+    tools {
         jdk 'myjava'
         maven 'mymaven'
     }
-	agent any
-      stages{
-           stage('Checkout'){
-              steps{
-		 echo 'cloning..'
-                 git 'https://github.com/RayItern/JUNECLASSPRO1.git'
-              }
-          }
-          stage('Compile'){
-              steps{
-                  echo 'compiling..'
-                  sh 'mvn compile'
-	      }
-          }
-          stage('CodeReview'){
-              steps{
-		    
-		  echo 'codeReview'
-                  sh 'mvn pmd:pmd'
-              }
-          }
-          
-          stage('Package'){
-              steps{
-                  sh 'mvn package'
-              }
-          }
-      }
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Cloning repository..'
+                git 'https://github.com/Keyzoneeee/AKINS-REVISION.git'
+            }
+        }
+        stage('Compile') {
+            steps {
+                echo 'Compiling..'
+                sh 'mvn compile'
+            }
+        }
+        stage('CodeReview') {
+            steps {
+                echo 'Performing code review..'
+                sh 'mvn pmd:pmd'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building project..'
+                sh 'mvn package'
+            }
+        }
+    }
 }
+
+    
+
