@@ -1,14 +1,14 @@
 pipeline{
     tools{
-        jdk 'myjava'
-        maven 'mymaven'
+        jdk 'java'
+        maven 'maven'
     }
 	agent any
       stages{
            stage('Checkout with git'){
               steps{
 		 echo 'cloning..'
-                 git 'https://github.com/RayItern/JUNECLASSPRO1.git'
+                 git 'https://github.com/adegokeobafemi/demo-project1.git'
               }
           }
           stage('Compile with mvn1'){
@@ -24,6 +24,18 @@ pipeline{
                   sh 'mvn pmd:pmd'
               }
           }
+
+	stage('UnitTest') {
+            steps {
+                echo 'Testing...'
+                sh 'mvn test'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
           
           stage('Package with mvn'){
               steps{
