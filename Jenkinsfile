@@ -8,7 +8,7 @@ pipeline{
            stage('Checkout with git'){
               steps{
 		 echo 'cloning..'
-                 git 'https://github.com/adegokeobafemi/demo-project1.git'
+                 git 'https://github.com/okenyi24/June-devops.git'
               }
           }
           stage('Compile with mvn1'){
